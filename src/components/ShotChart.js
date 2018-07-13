@@ -15,7 +15,7 @@ export class ShotChart extends React.Component {
 		displayTooltip: PropTypes.bool,
 	}
 
-	componentDidUpdate() {
+	loadShots = () => {
 		nba.stats.shots({
 			PlayerID: this.props.playerId
 		}).then((response) => {
@@ -37,6 +37,13 @@ export class ShotChart extends React.Component {
 			courtSelection.call(chart_court);
 			courtSelection.datum(final_shots).call(chart_shots);
 		});
+	}
+
+	componentDidMount() {
+		this.loadShots();
+	}
+	componentDidUpdate() {
+		this.loadShots();
 	}
 	render() {
 		return (
